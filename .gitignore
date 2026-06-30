@@ -1,0 +1,7 @@
+pim-venv/
+mi
+migrations/versions
+__pycache__/
+*.py[cod]
+*$py.class
+__pycache__
