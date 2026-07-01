@@ -47,7 +47,7 @@ class Variant(Base):
 
     product = relationship(
         "Product",
-        back_populates="variants"
+        back_populates="variant"
     )
 
     prices = relationship(
@@ -69,7 +69,7 @@ class Variant(Base):
     )
 
     attributes = relationship(
-        "Attribute",
+        "VariantAttribute",
         back_populates="variant",
         cascade="all, delete-orphan"
     )

@@ -1,5 +1,5 @@
 from sqlalchemy import (
-    Boolean,
+    ForeignKey,
     String,
 )
 from sqlalchemy.orm import (
@@ -17,33 +17,28 @@ class VariantAttribute(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    code: Mapped[str] = mapped_column(
-        String(100),
-        unique=True,
-        index=True
+    variant_id: Mapped[int] = mapped_column(
+        ForeignKey("variants.id"),
+        nullable=False
     )
 
-    name: Mapped[str] = mapped_column(
-        String(255)
+    attribute_id: Mapped[int] = mapped_column(
+        ForeignKey("attributes.id"),
+        nullable=False
     )
 
-    data_type: Mapped[str] = mapped_column(
-        String(50)
-    )
-
-    unit: Mapped[str | None] = mapped_column(
-        String(50)
-    )
-
-    is_required: Mapped[bool] = mapped_column(
-        Boolean,
-        default=False
+    value: Mapped[str] = mapped_column(
+        String(1000)
     )
 
     # ---------- Relationships ----------
 
-    attributes = relationship(
+    variant = relationship(
+        "Variant",
+        back_populates="attributes"
+    )
+
+    attribute = relationship(
         "Attribute",
-        back_populates="variant_attribute",
-        cascade="all, delete-orphan"
+        back_populates="variant_attributes"
     )

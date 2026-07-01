@@ -16,11 +16,11 @@ class Price(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
 
     variant_id: Mapped[int] = mapped_column(
-        ForeignKey("variant.id")
+        ForeignKey("variants.id")
         )
 
-    chanel_id: Mapped[int] = mapped_column(
-        ForeignKey("chanel.id")
+    channel_id: Mapped[int] = mapped_column(
+        ForeignKey("channels.id")
         )
     
     price: Mapped[int]
